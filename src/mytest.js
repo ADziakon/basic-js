@@ -173,17 +173,98 @@
 // console.log("sum: " + sum);
 
 //sum digit 
-let n = 91;
-let str = '';
-str = n.toString();
+// let n = 91;
+// let str = '';
+// str = n.toString();
 
-let res;
-let sum = 0;
-console.log(str );
+// let res;
+// let sum = 0;
+// console.log(str );
 
-    for(let i = 0; i<str.length;i++){
-        sum += Number(str[i]);
-        //console.log(sum);
-      }
+//     for(let i = 0; i<str.length;i++){
+//         sum += Number(str[i]);
+//         //console.log(sum);
+//       }
     
-console.log(res);
+// console.log(res);
+
+//transform array
+let arr = [ '--discrard-next', 5 ];
+let doubleNext = '--double-next';
+  let discardPrev = '--discard-prev';
+  let doublePrev = '--double-prev';
+  let discardNext = '--discard-next';
+  let indexNext, indexPrev, indexPrevDis, indexNextDis;
+  let action;
+let res = [];
+console.log("arr: " + arr + " isArr " + Array.isArray(arr));
+if(!Array.isArray(arr))
+throw new Error("'arr' parameter must be an instance of the Array!");
+if(arr == []){
+    return arr;
+}
+  if(arr.includes(doubleNext)){
+    indexNext = arr.indexOf(doubleNext);
+    action = 1;
+    console.log('test1 ' + indexNext);
+  }
+  if(arr.includes(doublePrev)){
+    indexPrev = arr.indexOf(doublePrev);
+    action = 2;
+    console.log('test2 ' + indexPrev);
+  }
+  if(arr.includes(discardNext)){
+    indexNextDis = arr.indexOf(discardNext);
+    action = 3;
+    console.log('test3 ' + indexNextDis);
+  }
+  if(arr.includes(discardPrev)){
+    indexPrevDis = arr.indexOf(discardPrev);
+    action = 4;
+    console.log('test4 ' + indexPrevDis);
+  }
+  if( indexNext === undefined ||  indexPrev === undefined ||  indexNextDis === undefined || indexPrevDis=== undefined){
+    console.log('test55 ' + indexPrevDis);
+    return arr;
+    
+  }
+  for(let i = 0;i<arr.length;i++){
+
+    if( i == indexNext ||  i == indexPrev ||  i == indexNextDis){
+        if( i == indexNext) {
+            if(indexNext != arr.length){
+                console.log("test0: " + i + " index " + indexNext + " act: " + action);
+                res.push(arr[i+1]);
+            }else{
+                console.log("test00: " + i + " index " + indexPrev + " act: " + action);
+                //res.push(arr[i+1]);
+            }
+        }
+        if( i == indexPrev){
+            if(indexPrev != 0){
+            res.push(arr[i-1]);
+            }else{
+                console.log('eee');
+            }
+        }
+        // if( i == indexPrevDis){
+        //     res.pop();
+        // }
+        if( i == indexNextDis){
+            console.log("qqq: " + i + " nextdis")
+            res.pop();
+        }
+
+    }else{
+        if( i == indexPrevDis){
+            if(indexPrevDis != 0){
+                console.log("qqq: " + i + " nextdis")
+                res.pop();
+            }
+        }else{
+            res.push(arr[i]);
+        }
+    }
+ 
+  }
+  console.log("res: " + res);
